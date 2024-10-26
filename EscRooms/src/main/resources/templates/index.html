@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<!-- Principal donde se mostrarán las opciones del sistema de los Escape Rooms -->
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Reservas de Salas de Escape</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Sistema de Reservas de Salas de Escape</h1>
+<div class="menu">
+    <a th:href="@{/crear-sala}">Agregar Sala</a>
+    <a th:href="@{/reservar-sala}">Reservar Sala</a>
+    <a th:href="@{/ver-salas}">Ver Salas Disponibles</a>
+    <a th:href="@{/ver-disponibilidad}">Ver Disponibilidad de Sala</a>
+</div>
+</body>
+</html>
