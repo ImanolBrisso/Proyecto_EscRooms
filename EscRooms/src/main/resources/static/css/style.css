@@ -1,0 +1,186 @@
+/* Principal
+
+ */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #e74c3c;
+    --background-color: #ecf0f1;
+    --text-color: #2c3e50;
+    --spacing: 1rem;
+    --border-radius: 8px;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Base
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: var(--spacing);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing);
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.menu-item {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Items con imágenes
+*/
+.menu-item i {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    transition: var(--transition);
+}
+
+.menu-item:hover i {
+    color: white;
+    transform: scale(1.1);
+}
+
+.menu-item h2 {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.menu-item p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+footer {
+    margin-top: 3rem;
+    text-align: center;
+    padding: 2rem 0;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius);
+}
+
+/* Figuras dinámicas o Animaciones
+ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-item {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Mejora de respuesta para distintas visualizaciones en los dispositivos - se comprueba tamaños
+*/
+@media (max-width: 768px) {
+    .menu {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 0 0.5rem;
+    }
+
+    .menu-item {
+        padding: 1rem;
+    }
+}
+
+/* Se mejora interactividad
+ */
+.text-primary {
+    color: var(--primary-color);
+}
+
+.text-secondary {
+    color: var(--secondary-color);
+}
+
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+
+/* Parte de la accesibilidad y ordenamiento
+*/
+.menu-item:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.3);
+}
+
+/* Se configura en base a posibilidad de usuario que haya modificado algun ajuste para reducir o evitar animaciones
+ */
+@media (prefers-reduced-motion: reduce) {
+    .menu-item {
+        transition: none;
+        animation: none;
+    }
+}
