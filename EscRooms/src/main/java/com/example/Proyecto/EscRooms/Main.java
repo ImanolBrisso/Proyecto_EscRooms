@@ -6,7 +6,7 @@ import com.example.Proyecto.EscRooms.Modelo.SalaEscape;
 import java.util.Scanner;
 
 /*
-Por ahora unicamente se realiza la interaccion del usuario mediante esta clase
+Por ahora unicamente se realiza la interaccion del usuario mediante esta clase y se utiliza de prueba inicial
  */
 public class Main {
     public static void main(String[] args) {
