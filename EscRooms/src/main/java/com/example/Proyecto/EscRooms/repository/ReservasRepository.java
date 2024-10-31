@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface ReservasRepository extends JpaRepository<Reservas, Long> {
 
+    // Se generan Filtros
+
     // Búsqueda de reservas por fecha
     List<Reservas> findByFechaReservaBetween(LocalDateTime inicio, LocalDateTime fin);
 

@@ -10,6 +10,8 @@ import java.util.Optional;
 @Repository
 public interface SalaEscapeRepository extends JpaRepository<SalaEscape, Long> {
 
+    // Se generan Filtros
+
     // Busqueda de sala por dificultad
     List<SalaEscape> findByDificultad(String dificultad);
 
