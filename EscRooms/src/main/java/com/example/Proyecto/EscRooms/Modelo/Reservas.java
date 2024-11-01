@@ -7,6 +7,7 @@ Se toma en cuenta la cantidad de salas y la gestion de reservas para una sala es
  */
 
 public class Reservas {
+    // Generar filtrados - @
     private ArrayList<SalaEscape> salas;
 
     public Reservas() {

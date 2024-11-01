@@ -1,5 +1,9 @@
 package com.example.Proyecto.EscRooms.Modelo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -7,8 +11,9 @@ import java.text.SimpleDateFormat;
 /*
 Se registran nuevas salas, las reservas, si se encuentran disponibles y capacidad
  */
-
+@Entity
 public class SalaEscape {
+    @Id @GeneratedValue // Generar filtrados - @
     private String nombre;
     private int capacidad; // la capacidad se usa al interactuar en la consola
     private ArrayList<String> reservas;

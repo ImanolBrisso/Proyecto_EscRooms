@@ -10,44 +10,45 @@
     <!-- Vinculacion con CSS, se realiza en carpeta static y no en template el apartado de CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
+    <!-- Mostrar Salas - registro para reservas y salas aparte -->
 
-</head>
-<body>
-<div class="container">
-    <header>
-        <h1>Sistema de Reservas de Salas de Escape</h1>
-        <p class="text-center">Gestiona tus salas de escape de manera fácil y eficiente</p>
-    </header>
+    </head>
+    <body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Reservas de Salas de Escape</h1>
+            <p class="text-center">Gestiona tus salas de escape de manera fácil y eficiente</p>
+        </header>
 
-    <nav class="menu">
-        <a class="menu-item" th:href="@{/crear-sala}">
-            <i class="fas fa-plus-circle"></i>
-            <h2>Agregar Sala</h2>
-            <p>Crear una nueva sala de escape</p>
-        </a>
+        <nav class="menu">
+            <a class="menu-item" th:href="@{/crear-sala}">
+                <i class="fas fa-plus-circle"></i>
+                <h2>Agregar Sala</h2>
+                <p>Crear una nueva sala de escape</p>
+            </a>
 
-        <a class="menu-item" th:href="@{/reservar-sala}">
-            <i class="fas fa-calendar-plus"></i>
-            <h2>Reservar Sala</h2>
-            <p>Hacer una nueva reservación</p>
-        </a>
+            <a class="menu-item" th:href="@{/reservar-sala}">
+                <i class="fas fa-calendar-plus"></i>
+                <h2>Reservar Sala</h2>
+                <p>Hacer una nueva reservación</p>
+            </a>
 
-        <a class="menu-item" th:href="@{/ver-salas}">
-            <i class="fas fa-door-open"></i>
-            <h2>Ver Salas Disponibles</h2>
-            <p>Consulta todas las salas</p>
-        </a>
+            <a class="menu-item" th:href="@{/ver-salas}">
+                <i class="fas fa-door-open"></i>
+                <h2>Ver Salas Disponibles</h2>
+                <p>Consulta todas las salas</p>
+            </a>
 
-        <a class="menu-item" th:href="@{/ver-disponibilidad}">
-            <i class="fas fa-clock"></i>
-            <h2>Ver Disponibilidad</h2>
-            <p>Consulta horarios disponibles</p>
-        </a>
-    </nav>
+            <a class="menu-item" th:href="@{/ver-disponibilidad}">
+                <i class="fas fa-clock"></i>
+                <h2>Ver Disponibilidad</h2>
+                <p>Consulta horarios disponibles</p>
+            </a>
+        </nav>
 
-    <footer>
-        <p>&copy; 2024 Sistema de Reservas de Salas de Escape. Todos los derechos reservados.</p>
-    </footer>
-</div>
-</body>
-</html>
+        <footer>
+            <p>&copy; 2024 Sistema de Reservas de Salas de Escape. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+    </body>
+    </html>
