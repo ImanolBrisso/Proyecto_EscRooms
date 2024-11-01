@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Map; // interfaz para coleccion de datos clave, valor (put,get, remove)
 import java.util.HashMap; // recuperacion de los valores y datos mencionados anteriormente
 
-// Utilizar Controller - Modelo MVC - con verificación en clases de Modelo -- 
+// Utilizar Controller - Modelo MVC - con verificación en clases de Modelo --
 @RestController
 /* Se utiliza RestController es una combinacion de Controller y Responsebody retornando datos en formas JSON o XML
 en vez de vistas como en el Controller - "retornan datos directamente al cliente en el cuerpo de la respuesta (generalmente en JSON),
