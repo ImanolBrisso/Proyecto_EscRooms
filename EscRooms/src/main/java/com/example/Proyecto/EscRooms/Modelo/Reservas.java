@@ -1,50 +1,117 @@
 package com.example.Proyecto.EscRooms.Modelo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
 
-/*
-Se toma en cuenta la cantidad de salas y la gestion de reservas para una sala especifica
+/**
+ * Clase que gestiona las reservas de salas de escape.
+ * Permite agregar salas, buscarlas, mostrarlas y realizar reservas.
  */
-
 public class Reservas {
-    // Generar filtrados - @
-    private ArrayList<SalaEscape> salas;
+    private static final Logger LOGGER = Logger.getLogger(Reservas.class.getName());
+    private static final DateTimeFormatter FECHA_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    private final List<SalaEscape> salas;
 
     public Reservas() {
         this.salas = new ArrayList<>();
     }
 
+    /**
+     * Agrega una nueva sala de escape.
+     * @param nombre Nombre de la sala
+     * @param capacidad Capacidad máxima de personas
+     * @throws IllegalArgumentException si el nombre está vacío o la capacidad es inválida
+     */
     public void agregarSala(String nombre, int capacidad) {
+        validarDatosSala(nombre, capacidad);
+
+        if (existeSala(nombre)) {
+            throw new IllegalArgumentException("Ya existe una sala con el nombre: " + nombre);
+        }
+
         SalaEscape nuevaSala = new SalaEscape(nombre, capacidad);
         salas.add(nuevaSala);
-        System.out.println("Sala " + nombre + " agregada para una capacidad de hasta " + capacidad + " personas como máximo.");
+        LOGGER.info(() -> String.format("Sala %s agregada con capacidad de %d personas", nombre, capacidad));
     }
 
-    public SalaEscape buscarSala(String nombre) {
-        for (SalaEscape sala : salas) {
-            if (sala.getNombre().equalsIgnoreCase(nombre)) {
-                return sala;
-            }
+    /**
+     * Busca una sala por su nombre.
+     * @param nombre Nombre de la sala a buscar
+     * @return Optional con la sala si existe
+     */
+    public Optional<SalaEscape> buscarSala(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre de la sala no puede estar vacío");
         }
-        System.out.println("No se ha encontrado ninguna sala.");
-        return null;
+
+        return salas.stream()
+                .filter(sala -> sala.getNombre().equalsIgnoreCase(nombre.trim()))
+                .findFirst();
     }
 
-    public void mostrarSalas() {
+    /**
+     * Muestra todas las salas disponibles.
+     * @return Lista de nombres de salas disponibles
+     */
+    public List<String> obtenerSalasDisponibles() {
         if (salas.isEmpty()) {
-            System.out.println("No hay salas registradas actualmente.");
-        } else {
-            System.out.println("Salas disponibles:");
-            for (SalaEscape sala : salas) {
-                System.out.println("- " + sala.getNombre());
+            LOGGER.info("No hay salas registradas actualmente.");
+            return new ArrayList<>();
+        }
+
+        List<String> salasList = new ArrayList<>();
+        for (SalaEscape sala : salas) {
+            salasList.add(sala.getNombre());
+        }
+        return salasList;
+    }
+
+    /**
+     * Realiza una reserva para una sala específica.
+     * @param nombreSala Nombre de la sala a reservar
+     * @param fecha Fecha y hora de la reserva en formato dd/MM/yyyy HH:mm
+     * @throws IllegalArgumentException si los datos son inválidos
+     */
+    public void reservarSala(String nombreSala, String fecha) {
+        if (nombreSala == null || fecha == null) {
+            throw new IllegalArgumentException("El nombre de la sala y la fecha son obligatorios");
+        }
+
+        Optional<SalaEscape> salaOptional = buscarSala(nombreSala);
+        if (salaOptional.isEmpty()) {
+            throw new IllegalArgumentException("No se encontró la sala: " + nombreSala);
+        }
+
+        try {
+            LocalDateTime fechaReserva = LocalDateTime.parse(fecha, FECHA_FORMATTER);
+            if (fechaReserva.isBefore(LocalDateTime.now())) {
+                throw new IllegalArgumentException("No se pueden hacer reservas para fechas pasadas");
             }
+
+            salaOptional.get().reservar(fecha);
+            LOGGER.info(() -> String.format("Reserva realizada para la sala %s en la fecha %s", nombreSala, fecha));
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Formato de fecha inválido. Use dd/MM/yyyy HH:mm");
         }
     }
 
-    public void reservarSala(String nombreSala, String fecha) {
-        SalaEscape sala = buscarSala(nombreSala); // verificar tipifacion de las fechas correctamente
-        if (sala != null) {
-            sala.reservar(fecha);
+    private void validarDatosSala(String nombre, int capacidad) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre de la sala no puede estar vacío");
         }
+        if (capacidad <= 0 || capacidad > 50) {  // Asumiendo un límite máximo razonable
+            throw new IllegalArgumentException("La capacidad debe ser un número positivo y menor a 50");
+        }
+    }
+
+    private boolean existeSala(String nombre) {
+        return salas.stream()
+                .anyMatch(sala -> sala.getNombre().equalsIgnoreCase(nombre.trim()));
     }
 }
