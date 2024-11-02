@@ -21,7 +21,7 @@ public class Reservas {
         this.salas = new ArrayList<>();
     }
 
-    /* Se procede a agregar una nueva sala de escape.
+    /* Se procede a agregar una nueva sala de escape. aaa
 
      Anotaciones a tener en cuenta:
      * @param nombre Nombre de la sala
