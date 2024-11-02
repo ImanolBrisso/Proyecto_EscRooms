@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-/**
- * Clase que gestiona las reservas de salas de escape.
- * Permite agregar salas, buscarlas, mostrarlas y realizar reservas.
+/* Clase que gestiona las reservas de las clases
+ * Agregar, búsqueda y muestra
  */
 public class Reservas {
     private static final Logger LOGGER = Logger.getLogger(Reservas.class.getName());
@@ -22,8 +21,9 @@ public class Reservas {
         this.salas = new ArrayList<>();
     }
 
-    /**
-     * Agrega una nueva sala de escape.
+    /* Se procede a agregar una nueva sala de escape.
+
+     Anotaciones a tener en cuenta:
      * @param nombre Nombre de la sala
      * @param capacidad Capacidad máxima de personas
      * @throws IllegalArgumentException si el nombre está vacío o la capacidad es inválida

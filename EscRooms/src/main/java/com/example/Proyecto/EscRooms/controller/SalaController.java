@@ -18,7 +18,7 @@ public class SalaController {
     @Autowired
     private SalaEscapeRepository salaRepository;
 
-    // Página principal - Lista todas las salas
+    // En el apartado principal se visualizan todas las salas
     @GetMapping
     public String getAllSalas(Model model) {
         try {
@@ -32,7 +32,7 @@ public class SalaController {
         }
     }
 
-    // Mostrar detalles de una sala específica
+    // Se muestran especificaciones de la sala seleccionada
     @GetMapping("/{id}")
     public String getSalaById(@PathVariable("id") Long id, Model model) {
         Optional<SalaEscape> salaData = salaRepository.findById(id);
@@ -45,7 +45,7 @@ public class SalaController {
         }
     }
 
-    // Formulario para crear nueva sala
+    // Para Crear nueva sala
     @GetMapping("/crear")
     public String mostrarFormularioCreacion(Model model) {
         model.addAttribute("sala", new SalaEscape());
@@ -53,7 +53,7 @@ public class SalaController {
         return "salas/formulario";
     }
 
-    // Procesar la creación de una nueva sala
+    // Secuencia que procede a crear la Sala
     @PostMapping("/crear")
     public String createSala(@ModelAttribute SalaEscape sala, RedirectAttributes redirectAttributes) {
         try {
@@ -66,7 +66,7 @@ public class SalaController {
         }
     }
 
-    // Formulario para editar sala
+    // Editar Sala
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Optional<SalaEscape> salaData = salaRepository.findById(id);
@@ -80,7 +80,7 @@ public class SalaController {
         }
     }
 
-    // Procesar la edición de una sala
+    // Secuencia que procede ae editar la Sala
     @PostMapping("/editar/{id}")
     public String updateSala(@PathVariable Long id, @ModelAttribute SalaEscape sala,
                              RedirectAttributes redirectAttributes) {
@@ -99,7 +99,7 @@ public class SalaController {
         }
     }
 
-    // Eliminar sala
+    // Para eliminar Sala
     @PostMapping("/eliminar/{id}")
     public String deleteSala(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
@@ -115,7 +115,7 @@ public class SalaController {
         return "redirect:/salas";
     }
 
-    // Buscar salas por dificultad
+    // Busqueda de salas por dificultad - en estilo poder visualziarlo con "candados" - "calaveras"
     @GetMapping("/dificultad/{dificultad}")
     public String getSalasByDificultad(@PathVariable String dificultad, Model model) {
         try {
@@ -130,7 +130,7 @@ public class SalaController {
         }
     }
 
-    // Método para manejar errores generales
+    // Se menajen los errores a tener en cuenta
     @ExceptionHandler(Exception.class)
     public String handleError(Exception e, Model model) {
         model.addAttribute("error", "Ha ocurrido un error: " + e.getMessage());
