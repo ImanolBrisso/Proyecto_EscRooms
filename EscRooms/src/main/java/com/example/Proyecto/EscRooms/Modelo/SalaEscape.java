@@ -5,6 +5,14 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+// Clases para metodo de reservar
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
+
 @Entity
 @Table(name = "salas_escape")
 public class SalaEscape {
@@ -73,6 +81,9 @@ public class SalaEscape {
         this.duracionMinutos = duracionMinutos;
         this.activo = activo;
         this.imagenUrl = imagenUrl;
+    }
+
+    public SalaEscape(String nombre, int capacidad) {
     }
 
     // Getters y Setters con validaciones
@@ -228,5 +239,61 @@ public class SalaEscape {
                 ", duracionMinutos=" + duracionMinutos +
                 ", activo=" + activo +
                 '}';
+    }
+
+    // Se crea el metodo reservar
+    public void reservarSala(String nombreSala, String fecha) {
+        if (nombreSala == null || fecha == null) {
+            throw new IllegalArgumentException("El nombre de la sala y la fecha son obligatorios");
+        }
+
+        Optional<SalaEscape> salaOptional = buscarSala(nombreSala);
+        if (salaOptional.isEmpty()) {
+            throw new IllegalArgumentException("No se encontró la sala: " + nombreSala);
+        }
+
+        try {
+            LocalDateTime fechaReserva = LocalDateTime.parse(fecha, FECHA_FORMATTER);
+            if (fechaReserva.isBefore(LocalDateTime.now())) {
+                throw new IllegalArgumentException("No se pueden hacer reservas para fechas pasadas");
+            }
+
+            salaOptional.get().reservar(fecha);
+            LOGGER.info(() -> String.format("Reserva realizada para la sala %s en la fecha %s", nombreSala, fecha));
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Formato de fecha inválido. Use dd/MM/yyyy HH:mm");
+        }
+    }
+
+    // Método auxiliar para buscar una sala por nombre
+    private Optional<SalaEscape> buscarSala(String nombreSala) {
+        return salas.stream()
+                .filter(sala -> sala.getNombre().equals(nombreSala))
+                .findFirst();
+    }
+
+    // Método para agregar una sala (de la pregunta anterior)
+    public void agregarSala(String nombre, int capacidad) {
+        validarDatosSala(nombre, capacidad);
+
+        if (existeSala(nombre)) {
+            throw new IllegalArgumentException("Ya existe una sala con el nombre: " + nombre);
+        }
+
+        SalaEscape nuevaSala = new SalaEscape(nombre, capacidad);
+        salas.add(nuevaSala);
+        LOGGER.info(() -> String.format("Sala %s agregada con capacidad de %d personas", nombre, capacidad));
+    }
+
+    // Método para validar los datos de la sala
+    private void validarDatosSala(String nombre, int capacidad) {
+        if (nombre == null || nombre.isEmpty() || capacidad <= 0) {
+            throw new IllegalArgumentException("Datos de sala no válidos.");
+        }
+    }
+
+    // Método para verificar si una sala ya existe
+    private boolean existeSala(String nombre) {
+        return salas.stream().anyMatch(sala -> sala.getNombre().equals(nombre));
     }
 }
