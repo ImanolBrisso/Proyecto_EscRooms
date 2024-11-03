@@ -21,7 +21,7 @@ public class Reservas {
         this.salas = new ArrayList<>();
     }
 
-    /* Se procede a agregar una nueva sala de escape. 
+    /* Se procede a agregar una nueva sala de escape.
 
      Anotaciones a tener en cuenta:
      * @param nombre Nombre de la sala
@@ -40,7 +40,7 @@ public class Reservas {
         LOGGER.info(() -> String.format("Sala %s agregada con capacidad de %d personas", nombre, capacidad));
     }
 
-    /**
+    /*
      * Busca una sala por su nombre.
      * @param nombre Nombre de la sala a buscar
      * @return Optional con la sala si existe
@@ -55,7 +55,7 @@ public class Reservas {
                 .findFirst();
     }
 
-    /**
+    /*
      * Muestra todas las salas disponibles.
      * @return Lista de nombres de salas disponibles
      */
@@ -72,7 +72,7 @@ public class Reservas {
         return salasList;
     }
 
-    /**
+    /*
      * Realiza una reserva para una sala específica.
      * @param nombreSala Nombre de la sala a reservar
      * @param fecha Fecha y hora de la reserva en formato dd/MM/yyyy HH:mm
@@ -85,7 +85,7 @@ public class Reservas {
 
         Optional<SalaEscape> salaOptional = buscarSala(nombreSala);
         if (salaOptional.isEmpty()) {
-            throw new IllegalArgumentException("No se encontró la sala: " + nombreSala);
+            throw new IllegalArgumentException("No se ha encontrado la sala: " + nombreSala);
         }
 
         try {

@@ -136,5 +136,6 @@ public class SalaController {
         model.addAttribute("error", "Ha ocurrido un error: " + e.getMessage());
         return "error";
     }
+
 }
 
