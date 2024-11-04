@@ -4,6 +4,7 @@ import com.example.Proyecto.EscRooms.Modelo.SalaEscape;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public interface SalaEscapeRepository extends JpaRepository<SalaEscape, Long> {
     List<SalaEscape> findByActivoTrue();
 
     // Búsqueda de salas por precio
-    List<SalaEscape> findByPrecioBetween(double precioMin, double precioMax);
+    List<SalaEscape> findByPrecioBetween(BigDecimal precio, BigDecimal precio2);
 
     // Búsqueda de sala por nombre
     Optional<SalaEscape> findByNombreIgnoreCase(String nombre);

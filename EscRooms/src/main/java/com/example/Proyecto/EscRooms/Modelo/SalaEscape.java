@@ -35,8 +35,19 @@ public class SalaEscape {
     @Column(nullable = false)
     private boolean activo = true;
 
+    public SalaEscape(String nombre, String descripcion, String dificultad, int capacidadMin, int capacidadMax, BigDecimal precio, int duracionMinutos) {
+
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.dificultad = dificultad;
+        this.capacidadMin = capacidadMin;
+        this.capacidadMax = capacidadMax;
+        this.precio = precio;
+        this.duracionMinutos = duracionMinutos;
+    }
+
     public SalaEscape() {
-        
+
     }
 
 
