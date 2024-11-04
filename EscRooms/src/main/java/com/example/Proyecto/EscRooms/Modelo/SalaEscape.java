@@ -28,22 +28,15 @@ public class SalaEscape {
     @Column(nullable = false)
     private String dificultad;
 
-    // Verificar metodos Min,Max,DecimalMin en caso de agregar dependencia en archivo pom.xml
-
-    @Min(value = 1, message = "La capacidad mínima debe ser al menos 1")
     @Column(name = "capacidad_min", nullable = false)
     private int capacidadMin;
 
-    @Min(value = 1, message = "La capacidad máxima debe ser al menos 1")
     @Column(name = "capacidad_max", nullable = false)
     private int capacidadMax;
 
-    @DecimalMin(value = "0.0", message = "El precio no puede ser negativo")
     @Column(nullable = false)
     private BigDecimal precio;
 
-    @Min(value = 15, message = "La duración mínima debe ser de 15 minutos")
-    @Max(value = 180, message = "La duración máxima debe ser de 180 minutos")
     @Column(name = "duracion_minutos", nullable = false)
     private int duracionMinutos;
 
@@ -211,7 +204,7 @@ public class SalaEscape {
         }
     }
 
-    // equals y hashCode basados en 'id'
+    // Hashcode (metodo que devuelve un entero) y Equals (metodo que determina si dos objetos son iguales) basados en ID - Aseguran estructura
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -239,4 +232,5 @@ public class SalaEscape {
                 '}';
     }
 }
+
 
