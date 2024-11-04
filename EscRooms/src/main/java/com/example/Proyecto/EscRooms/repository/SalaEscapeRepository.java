@@ -10,6 +10,7 @@ import java.util.Optional;
 //
 
 @Repository
+
 public interface SalaEscapeRepository extends JpaRepository<SalaEscape, Long> {
 
     // Se generan Filtros
@@ -20,13 +21,12 @@ public interface SalaEscapeRepository extends JpaRepository<SalaEscape, Long> {
     // Busqueda de sala por capacidad ya sea minima o máxima
     List<SalaEscape> findByCapacidadMinLessThanEqualAndCapacidadMaxGreaterThanEqual(int personas, int personas2);
 
-    // Búsqueda de sala por nombre
-    Optional<SalaEscape> findByNombreContainingIgnoreCase(String nombre);
-
     // Búsqueda de salas disponibles
     List<SalaEscape> findByActivoTrue();
 
     // Búsqueda de salas por precio
     List<SalaEscape> findByPrecioBetween(double precioMin, double precioMax);
 
+    // Búsqueda de sala por nombre
+    Optional<SalaEscape> findByNombreIgnoreCase(String nombre);
 }

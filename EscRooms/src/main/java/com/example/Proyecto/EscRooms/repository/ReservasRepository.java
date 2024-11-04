@@ -1,11 +1,13 @@
 package com.example.Proyecto.EscRooms.repository;
 
 import com.example.Proyecto.EscRooms.Modelo.Reservas;
+import com.example.Proyecto.EscRooms.Modelo.SalaEscape;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ReservasRepository extends JpaRepository<Reservas, Long> {
@@ -24,6 +26,11 @@ public interface ReservasRepository extends JpaRepository<Reservas, Long> {
     // Búsqueda y confirmación de reserva por horarios y fecha
     boolean existsByFechaReservaAndSalaEscapeId(LocalDateTime fechaReserva, Long salaId);
 
-    // Confirmación y conteo de reservas por sala para fecha especifica
-    Long countBySalaEscapeId(LocalDateTime salaId);
+    // Confirmación y conteo de reservas por sala (usando solo el salaId)
+    Long countBySalaEscapeId(Long salaId);
+
+    boolean existsByNombreIgnoreCase(String trim);
+
+    Optional<SalaEscape> findByNombreIgnoreCase(String trim);
 }
+
