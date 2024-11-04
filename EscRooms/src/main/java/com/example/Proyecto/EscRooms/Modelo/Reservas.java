@@ -22,17 +22,59 @@ public class Reservas {
     @Column(name = "cliente_email", nullable = false)
     private String clienteEmail;
 
-    // Metodos creados de ReservasService
+    // Constructores
+    public Reservas() {
+    }
+
+    public Reservas(SalaEscape salaEscape, LocalDateTime fechaReserva, String clienteEmail) {
+        this.salaEscape = salaEscape;
+        this.fechaReserva = fechaReserva;
+        this.clienteEmail = clienteEmail;
+    }
+
+    // Parametros de getters y seters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public SalaEscape getSalaEscape() {
+        return salaEscape;
+    }
+
     public void setSalaEscape(SalaEscape salaEscape) {
+        this.salaEscape = salaEscape;
+    }
+
+    public LocalDateTime getFechaReserva() {
+        return fechaReserva;
     }
 
     public void setFechaReserva(LocalDateTime fechaReserva) {
+        this.fechaReserva = fechaReserva;
+    }
+
+    public String getClienteEmail() {
+        return clienteEmail;
     }
 
     public void setClienteEmail(String clienteEmail) {
+        this.clienteEmail = clienteEmail;
     }
 
-    // Creados los siguientes parametros getters y setters
+    // Se puede sobreeescribr toString
+    @Override
+    public String toString() {
+        return "Reservas{" +
+                "id=" + id +
+                ", salaEscape=" + salaEscape.getNombre() +
+                ", fechaReserva=" + fechaReserva +
+                ", clienteEmail='" + clienteEmail + '\'' +
+                '}';
+    }
 }
 
 

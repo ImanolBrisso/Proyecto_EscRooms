@@ -1,6 +1,6 @@
 package com.example.Proyecto.EscRooms.controller;
 
-import com.example.Proyecto.EscRooms.Modelo.SalaEscape;
+
 import com.example.Proyecto.EscRooms.service.ReservasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
