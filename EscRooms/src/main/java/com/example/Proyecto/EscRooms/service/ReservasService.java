@@ -24,11 +24,7 @@ public class ReservasService {
     }
 
     public void agregarSala(SalaEscape salaEscape) {
-        salaEscapeRepository.save(salaEscape);  // Usar SalaEscapeRepository en lugar de ReservasRepository
-    }
-
-    public Optional<SalaEscape> buscarSalaPorNombre(String nombre) {
-        return salaEscapeRepository.findByNombreIgnoreCase(nombre);
+        salaEscapeRepository.save(salaEscape);
     }
 
     public List<SalaEscape> obtenerTodasLasSalas() {
@@ -39,12 +35,21 @@ public class ReservasService {
         if (reservasRepository.existsByFechaReservaAndSalaEscapeId(fechaReserva, salaId)) {
             throw new IllegalArgumentException("La sala ya está reservada para esa fecha y hora.");
         }
+
+        Optional<SalaEscape> salaEscape = salaEscapeRepository.findById(salaId);
+        if (salaEscape.isEmpty()) {
+            throw new IllegalArgumentException("La sala especificada no existe.");
+        }
+
+        // De modelo Reservas
         Reservas nuevaReserva = new Reservas();
-        nuevaReserva.setSalaEscape(new SalaEscape());
+        nuevaReserva.setSalaEscape(salaEscape.get());
         nuevaReserva.setFechaReserva(fechaReserva);
         nuevaReserva.setClienteEmail(clienteEmail);
+
         reservasRepository.save(nuevaReserva);
     }
 }
+
 
 

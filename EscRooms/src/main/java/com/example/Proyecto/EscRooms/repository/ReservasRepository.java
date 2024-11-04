@@ -26,6 +26,7 @@ public interface ReservasRepository extends JpaRepository<Reservas, Long> {
     // Búsqueda y confirmación de reserva por horarios y fecha
     boolean existsByFechaReservaAndSalaEscapeId(LocalDateTime fechaReserva, Long salaId);
 
+
     // Confirmación y conteo de reservas por sala (usando solo el salaId)
     Long countBySalaEscapeId(Long salaId);
 

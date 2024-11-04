@@ -1,5 +1,6 @@
 package com.example.Proyecto.EscRooms.Modelo;
 
+import com.example.Proyecto.EscRooms.Modelo.SalaEscape;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -21,8 +22,7 @@ public class Reservas {
     @Column(name = "cliente_email", nullable = false)
     private String clienteEmail;
 
-    // Se crean los siguientes metodos para la clase Reservas Service de "nuevareserva..."
-
+    // Metodos creados de ReservasService
     public void setSalaEscape(SalaEscape salaEscape) {
     }
 
@@ -32,6 +32,7 @@ public class Reservas {
     public void setClienteEmail(String clienteEmail) {
     }
 
-    // Creados los siguientes parametros: getters, setters, equals, hashCode y toString
+    // Creados los siguientes parametros getters y setters
 }
+
 
