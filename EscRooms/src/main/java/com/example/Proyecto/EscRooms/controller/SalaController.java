@@ -117,7 +117,7 @@ public class SalaController {
         return "redirect:/salas";
     }
 
-    // Busqueda de salas por dificultad - en estilo poder visualziarlo con "candados" - "calaveras"
+    // Busqueda de salas por dificultad - verificado en SalaEscapeRepository en estilo poder visualziarlo con "candados" - "calaveras"
     @GetMapping("/dificultad/{dificultad}")
     public String getSalasByDificultad(@PathVariable String dificultad, Model model) {
         try {

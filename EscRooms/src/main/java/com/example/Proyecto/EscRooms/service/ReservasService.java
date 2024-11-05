@@ -4,7 +4,7 @@ import com.example.Proyecto.EscRooms.Modelo.Reservas;
 import com.example.Proyecto.EscRooms.Modelo.SalaEscape;
 import com.example.Proyecto.EscRooms.repository.ReservasRepository;
 import com.example.Proyecto.EscRooms.repository.SalaEscapeRepository;
-import org.springframework.beans.factory.annotation.Autowired; // inyecta dependencias de manera automaticas en spring
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Service
 public class ReservasService {
-
     private final ReservasRepository reservasRepository;
     private final SalaEscapeRepository salaEscapeRepository;
 
@@ -31,23 +30,54 @@ public class ReservasService {
         return salaEscapeRepository.findAll();
     }
 
-    public void reservarSala(Long salaId, LocalDateTime fechaReserva, String clienteEmail) {
-        if (reservasRepository.existsByFechaReservaAndSalaEscapeId(fechaReserva, salaId)) {
-            throw new IllegalArgumentException("La sala ya está reservada para esa fecha y hora.");
+    public void reservarSala(Long salaId, LocalDateTime fecha, String clienteEmail) {
+        // Confirma si la sala existe actualmente
+        SalaEscape salaEscape = salaEscapeRepository.findById(salaId)
+                .orElseThrow(() -> new IllegalArgumentException("Sala no encontrada"));
+
+        // Confirma pero si ya existe una reserva para esa sala y esa hora especifica
+        if (reservasRepository.existsByFechaReservaAndSalaEscapeId(fecha, salaId)) {
+            throw new IllegalStateException("La sala ya se encuentra reservada para esa fecha y hora");
         }
 
-        Optional<SalaEscape> salaEscape = salaEscapeRepository.findById(salaId);
-        if (salaEscape.isEmpty()) {
-            throw new IllegalArgumentException("La sala especificada no existe.");
+        Reservas reserva = new Reservas(clienteEmail, fecha, salaEscape);
+        reservasRepository.save(reserva);
+    }
+
+    // Se definen los parametros de búsqueda de reservas - Confirmados en reservas repository para su utilidad
+    public List<Reservas> buscarReservasPorFecha(LocalDateTime fecha) { // se crea metodo pendiente en reservas repository de findbyfecharepository
+        return reservasRepository.findByFechaReserva(fecha);
+    }
+
+    public List<Reservas> buscarReservasPorRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        return reservasRepository.findByFechaReservaBetween(fechaInicio, fechaFin);
+    }
+
+    public List<Reservas> buscarReservasPorSala(Long salaId) {
+        return reservasRepository.findBySalaEscapeId(salaId);
+    }
+
+    public List<Reservas> buscarReservasPorCliente(String email) {
+        return reservasRepository.findByClienteEmail(email);
+    }
+
+    public boolean verificarDisponibilidad(Long salaId, LocalDateTime fecha) {
+        return !reservasRepository.existsByFechaReservaAndSalaEscapeId(fecha, salaId);
+    }
+
+    public void cancelarReserva(Long reservaId) {
+        if (!reservasRepository.existsById(reservaId)) {
+            throw new IllegalArgumentException("No se ha encontrado una reserva");
         }
+        reservasRepository.deleteById(reservaId);
+    }
 
-        // De modelo Reservas
-        Reservas nuevaReserva = new Reservas();
-        nuevaReserva.setSalaEscape(salaEscape.get());
-        nuevaReserva.setFechaReserva(fechaReserva);
-        nuevaReserva.setClienteEmail(clienteEmail);
+    public List<Reservas> obtenerReservasFuturas(LocalDateTime ahora) {
+        return reservasRepository.findByFechaReservaAfter(ahora);
+    }
 
-        reservasRepository.save(nuevaReserva);
+    public Optional<Reservas> obtenerReserva(Long reservaId) {
+        return reservasRepository.findById(reservaId);
     }
 }
 

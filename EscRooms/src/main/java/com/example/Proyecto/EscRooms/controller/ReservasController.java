@@ -37,7 +37,7 @@ public class ReservasController {
 
     @PostMapping("/reservar")
     public String reservarSala(@RequestParam Long salaId,
-                               @RequestParam String fechaReserva,
+                               @RequestParam String fechaReserva,// convierte el string a LocalDate abajo
                                @RequestParam String clienteEmail,
                                Model model) {
         LocalDateTime fecha = LocalDateTime.parse(fechaReserva); // Convierte el String a LocalDateTime
