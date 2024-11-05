@@ -1,60 +1,36 @@
 package com.example.Proyecto.EscRooms.Modelo;
 
-import com.example.Proyecto.EscRooms.Modelo.SalaEscape;
-import jakarta.persistence.*;
+import jakarta.persistence.*; //javax reemplazado por jakarta - librerias
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "reservas")
 public class Reservas {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "sala_escape_id", nullable = false)
-    private SalaEscape salaEscape;
-
-    @Column(name = "fecha_reserva", nullable = false)
+    private String clienteEmail;
     private LocalDateTime fechaReserva;
 
-    @Column(name = "cliente_email", nullable = false)
-    private String clienteEmail;
+    @ManyToOne
+    @JoinColumn(name = "sala_escape_id")
+    private SalaEscape salaEscape;
 
-    // Constructores
-    public Reservas() {
-    }
+    // Constructor vacío para JPA
+    public Reservas() {}
 
-    public Reservas(SalaEscape salaEscape, LocalDateTime fechaReserva, String clienteEmail) {
-        this.salaEscape = salaEscape;
-        this.fechaReserva = fechaReserva;
+    public Reservas(String clienteEmail, LocalDateTime fechaReserva, SalaEscape salaEscape) {
         this.clienteEmail = clienteEmail;
+        this.fechaReserva = fechaReserva;
+        this.salaEscape = salaEscape;
     }
 
-    // Parametros de getters y seters
+    // Parametros de getters y setters
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public SalaEscape getSalaEscape() {
-        return salaEscape;
-    }
-
-    public void setSalaEscape(SalaEscape salaEscape) {
-        this.salaEscape = salaEscape;
-    }
-
-    public LocalDateTime getFechaReserva() {
-        return fechaReserva;
-    }
-
-    public void setFechaReserva(LocalDateTime fechaReserva) {
-        this.fechaReserva = fechaReserva;
     }
 
     public String getClienteEmail() {
@@ -65,15 +41,20 @@ public class Reservas {
         this.clienteEmail = clienteEmail;
     }
 
-    // Se puede sobreeescribr toString
-    @Override
-    public String toString() {
-        return "Reservas{" +
-                "id=" + id +
-                ", salaEscape=" + salaEscape.getNombre() +
-                ", fechaReserva=" + fechaReserva +
-                ", clienteEmail='" + clienteEmail + '\'' +
-                '}';
+    public LocalDateTime getFechaReserva() {
+        return fechaReserva;
+    }
+
+    public void setFechaReserva(LocalDateTime fechaReserva) {
+        this.fechaReserva = fechaReserva;
+    }
+
+    public SalaEscape getSalaEscape() {
+        return salaEscape;
+    }
+
+    public void setSalaEscape(SalaEscape salaEscape) {
+        this.salaEscape = salaEscape;
     }
 }
 
