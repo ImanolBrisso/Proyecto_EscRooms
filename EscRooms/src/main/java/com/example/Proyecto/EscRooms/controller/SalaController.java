@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 import java.util.Optional;
 
+// AGREGAR LISTAS DE SALAS PENDIENTES DEL REPOSITORIO DE SALAESCAPE
+
 @Controller
 @RequestMapping("/salas")
 public class SalaController {
@@ -58,7 +60,7 @@ public class SalaController {
     public String createSala(@ModelAttribute SalaEscape sala, RedirectAttributes redirectAttributes) {
         try {
             salaRepository.save(sala);
-            redirectAttributes.addFlashAttribute("mensaje", "Sala creada exitosamente");
+            redirectAttributes.addFlashAttribute("respuesta", "Sala creada exitosamente");
             return "redirect:/salas";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al crear la sala");
@@ -88,7 +90,7 @@ public class SalaController {
             if (salaRepository.existsById(id)) {
                 sala.setId(id);  // Asegurarse de mantener el mismo ID
                 salaRepository.save(sala);
-                redirectAttributes.addFlashAttribute("mensaje", "Sala actualizada exitosamente");
+                redirectAttributes.addFlashAttribute("respuesta", "Sala actualizada exitosamente");
             } else {
                 redirectAttributes.addFlashAttribute("error", "Sala no encontrada");
             }
@@ -105,7 +107,7 @@ public class SalaController {
         try {
             if (salaRepository.existsById(id)) {
                 salaRepository.deleteById(id);
-                redirectAttributes.addFlashAttribute("mensaje", "Sala eliminada exitosamente");
+                redirectAttributes.addFlashAttribute("respuesta", "Sala eliminada exitosamente");
             } else {
                 redirectAttributes.addFlashAttribute("error", "Sala no encontrada");
             }

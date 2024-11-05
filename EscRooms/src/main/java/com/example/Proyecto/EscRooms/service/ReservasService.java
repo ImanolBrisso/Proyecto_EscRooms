@@ -4,7 +4,7 @@ import com.example.Proyecto.EscRooms.Modelo.Reservas;
 import com.example.Proyecto.EscRooms.Modelo.SalaEscape;
 import com.example.Proyecto.EscRooms.repository.ReservasRepository;
 import com.example.Proyecto.EscRooms.repository.SalaEscapeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired; // inyecta dependencias de manera automaticas en spring
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
