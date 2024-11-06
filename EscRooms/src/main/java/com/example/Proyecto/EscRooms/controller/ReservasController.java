@@ -25,14 +25,14 @@ public class ReservasController {
     public <SalaEscape> String agregarSala(@ModelAttribute SalaEscape salaEscape, Model model) {
         reservasService.agregarSala((com.example.Proyecto.EscRooms.Modelo.SalaEscape) salaEscape);
         model.addAttribute("mensaje", "Sala agregada exitosamente");
-        return "sala-agregada"; // Vista para confirmar la adición de la sala
+        return "sala-agregada"; // Visualización confirmar la adición de la sala
     }
 
     @GetMapping("/salas")
     public <SalaEscape> String obtenerTodasLasSalas(Model model) {
         List<SalaEscape> salas = (List<SalaEscape>) reservasService.obtenerTodasLasSalas();
         model.addAttribute("salas", salas);
-        return "lista-salas"; // Vista que muestra la lista de salas
+        return "lista-salas"; // Visualización de la lista de salas
     }
 
     @PostMapping("/reservar")
@@ -43,7 +43,7 @@ public class ReservasController {
         LocalDateTime fecha = LocalDateTime.parse(fechaReserva); // Convierte el String a LocalDateTime
         reservasService.reservarSala(salaId, fecha, clienteEmail);
         model.addAttribute("mensaje", "Reserva realizada exitosamente");
-        return "reserva-confirmada"; // Vista que confirma la reserva
+        return "reserva-confirmada"; // Se visualiza la reserva confirmada
     }
 }
 

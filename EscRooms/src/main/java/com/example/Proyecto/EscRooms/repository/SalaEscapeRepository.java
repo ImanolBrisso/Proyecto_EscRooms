@@ -19,7 +19,7 @@ public interface SalaEscapeRepository extends JpaRepository<SalaEscape, Long> {
 
     List<SalaEscape> findByDificultad(String dificultad);
     Optional<SalaEscape> findByNombre(String nombre);
-    List<SalaEscape> findByNombreContainingIgnoreCase(String nombre);
+    List<SalaEscape> findByNombreContainingIgnoreCase(String nombre); // verificar posibilidad de sumarlo bajo el mismo filtro de "ByNombre" en SalaController
     List<SalaEscape> findByCapacidadGreaterThanEqual(int capacidad);
     List<SalaEscape> findByPrecioLessThanEqual(double precio);
     List<SalaEscape> findByPrecioGreaterThanEqual(double precio);

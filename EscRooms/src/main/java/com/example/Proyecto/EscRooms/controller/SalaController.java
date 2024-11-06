@@ -117,6 +117,8 @@ public class SalaController {
         return "redirect:/salas";
     }
 
+    // Filtrado de búsqueda de salas - conectadas a SalaEscapeRepository
+
     // Busqueda de salas por dificultad - verificado en SalaEscapeRepository en estilo poder visualziarlo con "candados" - "calaveras"
     @GetMapping("/dificultad/{dificultad}")
     public String getSalasByDificultad(@PathVariable String dificultad, Model model) {
@@ -138,6 +140,45 @@ public class SalaController {
         model.addAttribute("error", "Ha ocurrido un error: " + e.getMessage());
         return "error";
     }
+
+    // Verificar by nombre - salas repository
+
+    @GetMapping("/nombre/{nombre}")
+    public String getSalasByNombre(@PathVariable String nombre, Model model) {
+        try {
+            Optional<SalaEscape> salas = salaRepository.findByNombre(nombre); // Se confirma Optional y no List - ya que puede contener un valor o no, Lis en cambio colecciona e indentifica objetos
+
+            if (salas.isPresent()) {
+                model.addAttribute("salas", salas.get());
+            } else {
+                model.addAttribute("respuesta", "No se encontraron salas con el nombre: " + nombre);
+            }
+            // Se necesitaba hacer una verificación previa antes de pasarlo a "modelo"
+
+            model.addAttribute("titulo", "Salas de nombre: " + nombre);
+            return "salas/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al buscar salas por nombre");
+            return "error";  // Retorna una vista de error (asegúrate de tener una vista "error.html")
+        }
+    }
+
+    @GetMapping("/capacidad/{capacidad}")
+    public String getSalasByCapacidad(@PathVariable Long capacidad, Model model) {
+        try {
+            List<SalaEscape> salas = salaRepository.findByCapacidadLessThanEqual(Math.toIntExact(capacidad));
+            model.addAttribute("salas", salas);
+            model.addAttribute("titulo", "Salas de capacidad: " + capacidad);
+            model.addAttribute("capacidadActual", capacidad);
+            return "salas/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al buscar salas por capacidad");
+            return "error";
+        }
+    }
+
+    // Proceder con Listado de Búsquedas pendientes del repository de SalaEscaperepository
+
 
 }
 
