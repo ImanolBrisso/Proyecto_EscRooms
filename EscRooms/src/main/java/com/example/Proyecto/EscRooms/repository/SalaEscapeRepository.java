@@ -11,16 +11,17 @@ public interface SalaEscapeRepository extends JpaRepository<SalaEscape, Long> {
 
     // Búsqueda de salas (principales a tener en cuenta)
 
+    List<SalaEscape> findByCapacidadGreaterThanEqual(int capacidad);
     List<SalaEscape> findByCapacidadLessThanEqual(int capacidad);
     List<SalaEscape> findByActivoTrue();
     List<SalaEscape> findByPrecioBetween(double precioMin, double precioMax);
+
 
     // Búsqueda para salas (posibles a añadir)
 
     List<SalaEscape> findByDificultad(String dificultad);
     Optional<SalaEscape> findByNombre(String nombre);
     List<SalaEscape> findByNombreContainingIgnoreCase(String nombre); // verificar posibilidad de sumarlo bajo el mismo filtro de "ByNombre" en SalaController
-    List<SalaEscape> findByCapacidadGreaterThanEqual(int capacidad);
     List<SalaEscape> findByPrecioLessThanEqual(double precio);
     List<SalaEscape> findByPrecioGreaterThanEqual(double precio);
 

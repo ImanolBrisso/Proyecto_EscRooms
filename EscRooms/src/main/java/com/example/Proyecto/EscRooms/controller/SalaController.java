@@ -163,6 +163,8 @@ public class SalaController {
         }
     }
 
+    // Ambos Metodos de Capacidad
+
     @GetMapping("/capacidad/{capacidad}")
     public String getSalasByCapacidad(@PathVariable Long capacidad, Model model) {
         try {
@@ -175,10 +177,77 @@ public class SalaController {
             model.addAttribute("error", "Error al buscar salas por capacidad");
             return "error";
         }
+
     }
 
-    // Proceder con Listado de Búsquedas pendientes del repository de SalaEscaperepository
+    @GetMapping("/capacidad/{capacidad}")
+    public String getSalasByCapacidad(@PathVariable int capacidad, Model model) {
+        try {
+            List<SalaEscape> salasPorCapacidad = salaRepository.findByCapacidadGreaterThanEqual(capacidad);
+            model.addAttribute("salas", salasPorCapacidad);
+            model.addAttribute("titulo", "Salas con capacidad mayor o igual a " + capacidad);
+            return "salas/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al buscar salas por capacidad");
+            return "error";
+        }
+    }
 
 
+    // Metodo utilizado: List<SalaEscape> findByActivoTrue() - SalaEscapeRepository - Anotacion
+    @GetMapping("/salas/activas")
+    public String getSalasActivas(Model model) {
+        try {
+            List<SalaEscape> salasActivas = salaRepository.findByActivoTrue();
+            model.addAttribute("salas", salasActivas);
+            model.addAttribute("titulo", "Salas Activas");
+            return "salas/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al buscar salas activas");
+            return "error";
+        }
+    }
+
+    // Metodo utilizado findByPrecioBetween
+    @GetMapping("/salas/precio")
+    public String getSalasByPrecio(@RequestParam double precioMin, @RequestParam double precioMax, Model model) {
+        try {
+            List<SalaEscape> salasPorPrecio = salaRepository.findByPrecioBetween(precioMin, precioMax);
+            model.addAttribute("salas", salasPorPrecio);
+            model.addAttribute("titulo", "Salas con precio entre " + precioMin + " y " + precioMax);
+            return "salas/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al buscar salas por rango de precio");
+            return "error";
+        }
+    }
+
+    // Ambos Metodos de Precio
+    // LessThanEqual
+    @GetMapping("/precio/menor-o-igual")
+    public String getSalasByPrecioMax(@RequestParam double precio, Model model) {
+        try {
+            List<SalaEscape> salasPorPrecioMax = salaRepository.findByPrecioLessThanEqual(precio);
+            model.addAttribute("salas", salasPorPrecioMax);
+            model.addAttribute("titulo", "Salas con precio menor o igual a " + precio);
+            return "salas/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al buscar salas por precio máximo");
+            return "error";
+        }
+    }
+    // PrecioGreaterThanEqual
+    @GetMapping("/precio/mayor-o-igual")
+    public String getSalasByPrecioMin(@RequestParam double precio, Model model) {
+        try {
+            List<SalaEscape> salasPorPrecioMin = salaRepository.findByPrecioGreaterThanEqual(precio);
+            model.addAttribute("salas", salasPorPrecioMin);
+            model.addAttribute("titulo", "Salas con precio mayor o igual a " + precio);
+            return "salas/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al buscar salas por precio mínimo");
+            return "error";
+        }
+    }
 }
 
