@@ -13,15 +13,17 @@ public class SalaEscape {
     private int capacidad;
     private double precio;
     private boolean activo;
+    private String dificultad; // comprobar dificultad en repository
 
     // Constructor vacío para JPA
     public SalaEscape() {}
 
-    public SalaEscape(String nombre, int capacidad, double precio, boolean activo) {
+    public SalaEscape(String nombre, int capacidad, double precio, boolean activo,String dificultad) {
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.precio = precio;
         this.activo = activo;
+        this.dificultad = dificultad;
     }
 
     // Se completan getters y setters
@@ -63,6 +65,14 @@ public class SalaEscape {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public String getDificultad() {
+        return dificultad;
+    }
+
+    public void setDificultad(String dificultad) {
+        this.dificultad = dificultad;
     }
 }
 

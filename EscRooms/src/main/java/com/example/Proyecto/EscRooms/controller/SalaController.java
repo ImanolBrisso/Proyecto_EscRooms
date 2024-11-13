@@ -163,7 +163,7 @@ public class SalaController {
         }
     }
 
-    // Ambos Metodos de Capacidad
+    // Ambos Metodos de Capacidad - Verificar ya que genera conflicto de utilizacion
 
     @GetMapping("/capacidad/{capacidad}")
     public String getSalasByCapacidad(@PathVariable Long capacidad, Model model) {
