@@ -27,10 +27,10 @@ public class SalaController {
             List<SalaEscape> salas = salaRepository.findAll();
             model.addAttribute("salas", salas);
             model.addAttribute("titulo", "Listado de Salas de Escape");
-            return "salas/lista";  // retorna el nombre de la vista (lista.html)
+            return "lista_de_salas";  // retorna el nombre de la vista (lista.html)
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las salas");
-            return "error";
+            return "error"; // que retorne el error
         }
     }
 
@@ -52,7 +52,7 @@ public class SalaController {
     public String mostrarFormularioCreacion(Model model) {
         model.addAttribute("sala", new SalaEscape());
         model.addAttribute("titulo", "Crear Nueva Sala");
-        return "salas/formulario";
+        return "crear_sala";
     }
 
     // Secuencia que procede a crear la Sala
@@ -165,7 +165,7 @@ public class SalaController {
 
     // --------------Ambos Metodos de Capacidad - Verificar ya que genera conflicto de utilizacion-----------
 
-    @GetMapping("/capacidad/{capacidad}")
+    @GetMapping("/capacidad/menor-o-igual/{capacidad}") // Se modifica "capacidad/menor-o-igual" - para no repetir nombre en el metodo
     public String getSalasByCapacidad(@PathVariable Long capacidad, Model model) {
         try {
             List<SalaEscape> salas = salaRepository.findByCapacidadLessThanEqual(Math.toIntExact(capacidad));
@@ -180,7 +180,7 @@ public class SalaController {
 
     }
 
-    @GetMapping("/capacidad/{capacidad}")
+    @GetMapping("/capacidad/mayor-o-igual/{capacidad}") // Se modifica "capacidad/mayor-o-igual" - para no repetir nombre de metodo
     public String getSalasByCapacidad(@PathVariable int capacidad, Model model) {
         try {
             List<SalaEscape> salasPorCapacidad = salaRepository.findByCapacidadGreaterThanEqual(capacidad);

@@ -23,7 +23,7 @@
         </header>
 
         <nav class="menu">
-            <a class="menu-item" th:href="@{/crear-sala}">
+            <a class="menu-item" th:href="@{/salas/crear}">
                 <i class="fas fa-plus-circle"></i>
                 <h2>Agregar Sala</h2>
                 <p>Crear una nueva sala de escape</p>
@@ -45,6 +45,13 @@
                 <i class="fas fa-clock"></i>
                 <h2>Ver Disponibilidad</h2>
                 <p>Consulta horarios disponibles</p>
+            </a>
+
+            <!-- Se modifica para vista de salas -->
+            <a class="menu-item" th:href="@{/salas}">
+                <i class="fas fa-clock"></i>
+                <h2>Salas</h2>
+                <p>Consulta total de las salas</p>
             </a>
         </nav>
 

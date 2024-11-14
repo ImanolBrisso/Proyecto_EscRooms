@@ -6,7 +6,34 @@
     <title>Agregar Sala</title>
 </head>
 <body>
-<h1 th:text="${Sala}"></h1>
-<a href="/reservas/salas">Ver todas las salas</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>
+            <th>Nombre</th>
+            <th>Capacidad</th>
+            <th>Dificultad</th>
+            <th>Precio</th>
+            <th>Activo</th>
+            <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sala: ${salas}">
+        <td th:text="${sala.nombre}"></td>
+        <td th:text="${sala.capacidad}"></td>
+        <td th:text="${sala.activo}"></td>
+        <td th:text="${sala.dificultad}"></td>
+        <td th:text="${sala.precio}"></td>
+        <td>
+            <a th:href="@{/salas/editar/{id}(id=${sala.id})}">editar</a>
+            <a th:href="@{/salas/eliminar/{id}(id=${sala.id})}">editar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
+
+
 </html>
