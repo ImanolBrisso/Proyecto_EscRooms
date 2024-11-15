@@ -15,7 +15,7 @@
 <h1>Agregar una Nueva Sala</h1>
 <form th:action="@{/salas/crear}" th:object="${sala}" method="post">
 
-    <!-- dividir por campos -->
+    <!-- dividir por campos y completar los labels restantes -->
     <label for="nombre">Nombre de la sala:</label>
     <input type="text" id="nombre" th:field="*{nombre}" name="nombre" required>
 
