@@ -1,0 +1,86 @@
+<!-- Verificar ubicaciones y rutas del controlador de Reservas -->
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Gestionar Reservas</h1>
+
+<div th:if="${mensaje}">
+    <p th:text="${mensaje}"></p>
+</div>
+
+<h2>Reservar Sala</h2>
+<form th:action="@{/reservas/reservar}" method="post">
+    <div>
+        <label for="clienteEmail">Cliente Email:</label>
+        <input type="email" id="clienteEmail" name="clienteEmail" required>
+    </div>
+    <div>
+        <label for="fechaReserva">Fecha de Reserva:</label>
+        <input type="datetime-local" id="fechaReserva" name="fechaReserva" required>
+    </div>
+    <div>
+        <label for="salaEscape">Sala de Escape:</label>
+        <select id="salaEscape" name="salaId" required>
+            <option value="" disabled selected>Selecciona una Sala</option>
+            <option th:each="sala : ${salas}" th:value="${sala.id}" th:text="${sala.nombre}"></option>
+        </select>
+    </div>
+    <div>
+        <button type="submit">Reservar</button>
+    </div>
+</form>
+
+<h2>Listado de Salas</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sala : ${salas}">
+        <td th:text="${sala.id}"></td>
+        <td th:text="${sala.nombre}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Listado de Reservas</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Cliente Email</th>
+        <th>Fecha de Reserva</th>
+        <th>Sala de Escape</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reserva : ${reservas}">
+        <td th:text="${reserva.id}"></td>
+        <td th:text="${reserva.clienteEmail}"></td>
+        <td th:text="${#dates.format(reserva.fechaReserva, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${reserva.salaEscape.nombre}"></td>
+        <td>
+            <a th:href="@{/reservas/editar/{id}(id=${reserva.id})}">Editar</a>
+            <a th:href="@{/reservas/eliminar/{id}(id=${reserva.id})}">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/}">Volver al Inicio</a>
+
+</body>
+
+</html>
+
