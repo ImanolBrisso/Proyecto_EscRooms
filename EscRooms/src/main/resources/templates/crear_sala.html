@@ -1,4 +1,4 @@
-<!-- Pendiente a modificar -->
+<!-- Agregar Sala - Crear una nueva sala de Escape -  Pendiente a modificar -->
 
 <!DOCTYPE html>
 
@@ -15,7 +15,7 @@
 <h1>Agregar una Nueva Sala</h1>
 <form th:action="@{/salas/crear}" th:object="${sala}" method="post">
 
-    <!-- dividir por campos y completar los labels restantes -->
+    <!-- dividir por campos - se completan los labels restantes -->
     <label for="nombre">Nombre de la sala:</label>
     <input type="text" id="nombre" th:field="*{nombre}" name="nombre" required>
 
@@ -32,6 +32,12 @@
         <option value="4">extremo</option>
         <option value="5">pesadilla</option>
     </select>
+
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio" th:field="*{precio}" name="precio" required>
+
+    <label for="activo">Activo:</label>
+    <input type="checkbox" id="activo" th:field="*{activo}" name="activo">
 
     <button type="submit">Agregar Sala</button>
 </form>
