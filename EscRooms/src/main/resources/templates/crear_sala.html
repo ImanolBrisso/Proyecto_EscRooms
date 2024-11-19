@@ -1,5 +1,3 @@
-<!-- Agregar Sala - Crear una nueva sala de Escape -  Pendiente a modificar -->
-
 <!DOCTYPE html>
 
 <!-- Formulario para agregar nuevas salas de escape -->
@@ -15,32 +13,45 @@
 <h1>Agregar una Nueva Sala</h1>
 <form th:action="@{/salas/crear}" th:object="${sala}" method="post">
 
-    <!-- dividir por campos - se completan los labels restantes -->
-    <label for="nombre">Nombre de la sala:</label>
-    <input type="text" id="nombre" th:field="*{nombre}" name="nombre" required>
+    <!-- Se completaron labels restantes y divisiones por campos -->
 
+    <div>
+        <label for="nombre">Nombre de la sala:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" name="nombre" required>
+    </div>
 
-    <label for="capacidad">Capacidad:</label>
-    <input type="number" id="capacidad" name="capacidad" required>
+    <div>
+        <label for="capacidad">Capacidad:</label>
+        <input type="number" id="capacidad" th:field="*{capacidad}" name="capacidad" required>
+    </div>
 
-    <label for="dificultad">Capacidad:</label>
-    <select id="dificultad" th:field="*{dificultad}" required>
-        <option value="" selected disabled>Selecciona la Dificultad</option>
-        <option value="1">facil</option>
-        <option value="2">medio</option>
-        <option value="3">dificil</option>
-        <option value="4">extremo</option>
-        <option value="5">pesadilla</option>
-    </select>
+    <div>
+        <label for="dificultad">Dificultad:</label>
+        <select id="dificultad" th:field="*{dificultad}" required>
+            <option value="" selected disabled>Selecciona la Dificultad</option>
+            <option value="1">Fácil</option>
+            <option value="2">Medio</option>
+            <option value="3">Difícil</option>
+            <option value="4">Extremo</option>
+            <option value="5">Pesadilla</option>
+        </select>
+    </div>
 
-    <label for="precio">Precio:</label>
-    <input type="number" id="precio" th:field="*{precio}" name="precio" required>
+    <div>
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" th:field="*{precio}" name="precio" required>
+    </div>
 
-    <label for="activo">Activo:</label>
-    <input type="checkbox" id="activo" th:field="*{activo}" name="activo">
+    <div>
+        <label for="activo">Activo:</label>
+        <input type="checkbox" id="activo" th:field="*{activo}" name="activo">
+    </div>
 
-    <button type="submit">Agregar Sala</button>
+    <div>
+        <button type="submit">Agregar Sala</button>
+    </div>
 </form>
 <a th:href="@{/}">Volver al Inicio</a>
 </body>
 </html>
+

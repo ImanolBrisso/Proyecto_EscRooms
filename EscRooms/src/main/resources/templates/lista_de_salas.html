@@ -1,34 +1,36 @@
 <!-- Salas - Consulta todas las salas -  Pendiente a modificar -->
 
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Agregar Sala</title>
+    <title>Consultar Salas</title>
 </head>
 <body>
+
+<h1>Consultar Salas</h1>
 
 <table>
     <thead>
     <tr>
-        <th>
-            <th>Nombre</th>
-            <th>Capacidad</th>
-            <th>Dificultad</th>
-            <th>Precio</th>
-            <th>Activo</th>
-            <th>Acciones</th>
+        <th>Nombre</th>
+        <th>Capacidad</th>
+        <th>Dificultad</th>
+        <th>Precio</th>
+        <th>Activo</th>
+        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="sala: ${salas}">
+    <tr th:each="sala : ${salas}">
         <td th:text="${sala.nombre}"></td>
         <td th:text="${sala.capacidad}"></td>
-        <td th:text="${sala.activo}"></td>
         <td th:text="${sala.dificultad}"></td>
         <td th:text="${sala.precio}"></td>
+        <td th:text="${sala.activo ? 'Sí' : 'No'}"></td>
         <td>
-            <a th:href="@{/salas/editar/{id}(id=${sala.id})}">editar</a>
-            <a th:href="@{/salas/eliminar/{id}(id=${sala.id})}">editar</a>
+            <a th:href="@{/salas/editar/{id}(id=${sala.id})}">Editar</a>
+            <a th:href="@{/salas/eliminar/{id}(id=${sala.id})}">Eliminar</a>
         </td>
     </tr>
     </tbody>
@@ -37,3 +39,4 @@
 
 
 </html>
+
