@@ -79,6 +79,10 @@ public class ReservasService {
     public Optional<Reservas> obtenerReserva(Long reservaId) {
         return reservasRepository.findById(reservaId);
     }
+
+    public List<Reservas> obtenerTodaslasReservas() {
+        return reservasRepository.findAll(); // Busqueda de todas las salas
+    }
 }
 
 

@@ -68,7 +68,7 @@
     <tr th:each="reserva : ${reservas}">
         <td th:text="${reserva.id}"></td>
         <td th:text="${reserva.clienteEmail}"></td>
-        <td th:text="${#dates.format(reserva.fechaReserva, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${(reserva.fechaReserva)}"></td>
         <td th:text="${reserva.salaEscape.nombre}"></td>
         <td>
             <a th:href="@{/reservas/editar/{id}(id=${reserva.id})}">Editar</a>
