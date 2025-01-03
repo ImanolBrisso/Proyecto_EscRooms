@@ -1,43 +1,60 @@
-<!-- Salas - Consulta todas las salas -  Pendiente a modificar -->
+<!-- Salas - Consulta todas las salas -->
 
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar Salas</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<div class="container">
+    <header>
+        <h1>Consultar Salas</h1>
+    </header>
 
-<h1>Consultar Salas</h1>
+    <!-- Tabla de Salas -->
+    <div class="table-container">
+        <table class="custom-table">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Capacidad</th>
+                <th>Dificultad</th>
+                <th>Precio</th>
+                <th>Activo</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="sala : ${salas}">
+                <td th:text="${sala.nombre}"></td>
+                <td th:text="${sala.capacidad}"></td>
+                <td th:text="${sala.dificultad}"></td>
+                <td th:text="${sala.precio}"></td>
+                <td>
+                            <span th:text="${sala.activo ? 'Sí' : 'No'}"
+                                  th:class="${sala.activo ? 'badge badge-success' : 'badge badge-danger'}">
+                            </span>
+                </td>
+                <td class="actions-column">
+                    <a th:href="@{/salas/editar/{id}(id=${sala.id})}" class="btn btn-secondary btn-sm">Editar</a>
+                    <a th:href="@{/salas/eliminar/{id}(id=${sala.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-<table>
-    <thead>
-    <tr>
-        <th>Nombre</th>
-        <th>Capacidad</th>
-        <th>Dificultad</th>
-        <th>Precio</th>
-        <th>Activo</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="sala : ${salas}">
-        <td th:text="${sala.nombre}"></td>
-        <td th:text="${sala.capacidad}"></td>
-        <td th:text="${sala.dificultad}"></td>
-        <td th:text="${sala.precio}"></td>
-        <td th:text="${sala.activo ? 'Sí' : 'No'}"></td>
-        <td>
-            <a th:href="@{/salas/editar/{id}(id=${sala.id})}">Editar</a>
-            <a th:href="@{/salas/eliminar/{id}(id=${sala.id})}">Eliminar</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <div class="button-container mt-2">
+        <a th:href="@{/}" class="btn btn-secondary">Volver al Inicio</a>
+    </div>
+
+    <footer>
+        <p>© 2024 Sistema de Reservas de Salas de Escape. Todos los derechos reservados.</p>
+    </footer>
+</div>
 </body>
-
-
 </html>
 

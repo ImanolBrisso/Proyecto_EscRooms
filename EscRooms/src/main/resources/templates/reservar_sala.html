@@ -9,78 +9,96 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Gestionar Reservas</h1>
+<div class="container">
+    <header>
+        <h1>Gestionar Reservas</h1>
+    </header>
 
-<div th:if="${mensaje}">
-    <p th:text="${mensaje}"></p>
+    <!-- Mensaje de alerta -->
+    <div th:if="${mensaje}" class="alert">
+        <p th:text="${mensaje}"></p>
+    </div>
+
+    <!-- Formulario de Reserva -->
+    <div class="form-container">
+        <h2 class="section-title">Reservar Sala</h2>
+        <form th:action="@{/reservas/reservar}" method="post">
+            <div class="form-group">
+                <label for="clienteEmail">Cliente Email:</label>
+                <input type="email" id="clienteEmail" name="clienteEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="fechaReserva">Fecha de Reserva:</label>
+                <input type="datetime-local" id="fechaReserva" name="fechaReserva" required>
+            </div>
+            <div class="form-group">
+                <label for="salaEscape">Sala de Escape:</label>
+                <select id="salaEscape" name="salaId" required>
+                    <option value="" disabled selected>Selecciona una Sala</option>
+                    <option th:each="sala : ${salas}" th:value="${sala.id}" th:text="${sala.nombre}"></option>
+                </select>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Reservar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabla de Salas -->
+    <div class="table-container">
+        <h2 class="section-title">Listado de Salas</h2>
+        <table class="custom-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="sala : ${salas}">
+                <td th:text="${sala.id}"></td>
+                <td th:text="${sala.nombre}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Tabla de Reservas -->
+    <div class="table-container">
+        <h2 class="section-title">Listado de Reservas</h2>
+        <table class="custom-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente Email</th>
+                <th>Fecha de Reserva</th>
+                <th>Sala de Escape</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reserva : ${reservas}">
+                <td th:text="${reserva.id}"></td>
+                <td th:text="${reserva.clienteEmail}"></td>
+                <td th:text="${(reserva.fechaReserva)}"></td>
+                <td th:text="${reserva.salaEscape.nombre}"></td>
+                <td class="actions-column">
+                    <a th:href="@{/reservas/editar/{id}(id=${reserva.id})}" class="btn btn-secondary btn-sm">Editar</a>
+                    <a th:href="@{/reservas/eliminar/{id}(id=${reserva.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="button-container mt-2">
+        <a th:href="@{/}" class="btn btn-secondary">Volver al Inicio</a>
+    </div>
+
+    <footer>
+        <p>© 2024 Sistema de Reservas de Salas de Escape. Todos los derechos reservados.</p>
+    </footer>
 </div>
-
-<h2>Reservar Sala</h2>
-<form th:action="@{/reservas/reservar}" method="post">
-    <div>
-        <label for="clienteEmail">Cliente Email:</label>
-        <input type="email" id="clienteEmail" name="clienteEmail" required>
-    </div>
-    <div>
-        <label for="fechaReserva">Fecha de Reserva:</label>
-        <input type="datetime-local" id="fechaReserva" name="fechaReserva" required>
-    </div>
-    <div>
-        <label for="salaEscape">Sala de Escape:</label>
-        <select id="salaEscape" name="salaId" required>
-            <option value="" disabled selected>Selecciona una Sala</option>
-            <option th:each="sala : ${salas}" th:value="${sala.id}" th:text="${sala.nombre}"></option>
-        </select>
-    </div>
-    <div>
-        <button type="submit">Reservar</button>
-    </div>
-</form>
-
-<h2>Listado de Salas</h2>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="sala : ${salas}">
-        <td th:text="${sala.id}"></td>
-        <td th:text="${sala.nombre}"></td>
-    </tr>
-    </tbody>
-</table>
-
-<h2>Listado de Reservas</h2>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Cliente Email</th>
-        <th>Fecha de Reserva</th>
-        <th>Sala de Escape</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="reserva : ${reservas}">
-        <td th:text="${reserva.id}"></td>
-        <td th:text="${reserva.clienteEmail}"></td>
-        <td th:text="${(reserva.fechaReserva)}"></td>
-        <td th:text="${reserva.salaEscape.nombre}"></td>
-        <td>
-            <a th:href="@{/reservas/editar/{id}(id=${reserva.id})}">Editar</a>
-            <a th:href="@{/reservas/eliminar/{id}(id=${reserva.id})}">Eliminar</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<a th:href="@{/}">Volver al Inicio</a>
-
 </body>
-
 </html>
 

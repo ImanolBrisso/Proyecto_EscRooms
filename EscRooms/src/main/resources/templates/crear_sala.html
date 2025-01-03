@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-
-<!-- Formulario para agregar nuevas salas de escape -->
-
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -10,48 +7,59 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Agregar una Nueva Sala</h1>
-<form th:action="@{/salas/crear}" th:object="${sala}" method="post">
+<div class="container">
+    <!-- Header con el mismo estilo que la página principal -->
+    <header>
+        <h1>Agregar una Nueva Sala</h1>
+    </header>
 
-    <!-- Se completaron labels restantes y divisiones por campos -->
+    <!-- Contenedor del formulario -->
+    <div class="form-container">
+        <form th:action="@{/salas/crear}" th:object="${sala}" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre de la sala:</label>
+                <input type="text" id="nombre" th:field="*{nombre}" name="nombre" required>
+            </div>
 
-    <div>
-        <label for="nombre">Nombre de la sala:</label>
-        <input type="text" id="nombre" th:field="*{nombre}" name="nombre" required>
+            <div class="form-group">
+                <label for="capacidad">Capacidad:</label>
+                <input type="number" id="capacidad" th:field="*{capacidad}" name="capacidad" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dificultad">Dificultad:</label>
+                <select id="dificultad" th:field="*{dificultad}" required>
+                    <option value="" disabled selected>Selecciona la Dificultad</option>
+                    <option value="1">Fácil</option>
+                    <option value="2">Medio</option>
+                    <option value="3">Difícil</option>
+                    <option value="4">Extremo</option>
+                    <option value="5">Pesadilla</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" th:field="*{precio}" name="precio" required>
+            </div>
+
+            <div class="form-group checkbox-container">
+                <input type="checkbox" id="activo" th:field="*{activo}" name="activo">
+                <label for="activo">Activo</label>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Agregar Sala</button>
+                <a th:href="@{/}" class="btn btn-secondary">Volver al Inicio</a>
+            </div>
+        </form>
     </div>
 
-    <div>
-        <label for="capacidad">Capacidad:</label>
-        <input type="number" id="capacidad" th:field="*{capacidad}" name="capacidad" required>
-    </div>
-
-    <div>
-        <label for="dificultad">Dificultad:</label>
-        <select id="dificultad" th:field="*{dificultad}" required>
-            <option value="" disabled selected>Selecciona la Dificultad</option>
-            <option value="1">Fácil</option>
-            <option value="2">Medio</option>
-            <option value="3">Difícil</option>
-            <option value="4">Extremo</option>
-            <option value="5">Pesadilla</option>
-        </select>
-    </div>
-
-    <div>
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" th:field="*{precio}" name="precio" required>
-    </div>
-
-    <div>
-        <label for="activo">Activo:</label>
-        <input type="checkbox" id="activo" th:field="*{activo}" name="activo">
-    </div>
-
-    <div>
-        <button type="submit">Agregar Sala</button>
-    </div>
-</form>
-<a th:href="@{/}">Volver al Inicio</a>
+    <!-- Footer consistente con la página principal -->
+    <footer>
+        <p>© 2024 Sistema de Reservas de Salas de Escape. Todos los derechos reservados.</p>
+    </footer>
+</div>
 </body>
 </html>
 
