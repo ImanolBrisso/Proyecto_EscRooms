@@ -11,6 +11,8 @@
 
     <!-- Vinculacion con CSS, se realiza en carpeta static y no en template el apartado de CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Verificar FAVICON -->
+    <link rel="icon" type="image/png" href="/imagenes/De todo/favicon_io_candado/favicon-16x16.png">
 
     <!-- Mostrar Salas - registro para reservas y salas aparte -->
 
@@ -42,6 +44,23 @@
                 <p>Consulta total de las salas</p>
             </a>
         </nav>
+
+        <!-- Sección: Salas de Escape - verificar donde ubicar cada integracion- imagen, historia, dificultad -->
+        <section class="sala-ejemplo">
+            <h2>Relatos Perturbadores</h2>
+            <div class="sala">
+                <img src="/imagenes/alquimia.png" alt="Imagen de una sala de escape" class="sala-imagen">
+                <div class="sala-detalles">
+                    <h3>"Último Aliento"</h3>
+
+                    <p>Adéntrate en el misterioso laboratorio de un alquimista legendario que buscaba transformar plomo en oro y alcanzar la inmortalidad. Entre calderos burbujeantes y fórmulas crípticas, deberás desentrañar sus secretos y completar la transmutación final antes de que el laboratorio quede sellado para siempre.</p>
+                    <p>Dificultad:
+
+                        <span class="candados">🔒🔒🔒🔒🔒</span>
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <footer>
             <p>&copy; 2024 Sistema de Reservas de Salas de Escape. Todos los derechos reservados.</p>
